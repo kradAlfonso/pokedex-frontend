@@ -1,25 +1,48 @@
-import logo from './logo.svg';
-import './App.css';
+import { Button, Column, Grid, Row } from "carbon-components-react";
+import {useState} from "react"
+import Card from "./components/card";
 
-function App() {
+const App = () => {
+  const [pokemonImage, setPokemonImage] = useState("");
+  const [pokemonName, setPokemonName] = useState("");
+  const [pokemonTypes, setPokemonTypes] = useState([]);
+  const [pokemonMoves, setPokemonMoves] = useState([]);
+  const getPokemon = (pokemonName) => {
+    const url = `https://pokeapi.co/api/v2/pokemon/${pokemonName}`;
+    fetch(url)
+      .then((response) => response.json())
+      .then((result) => {
+        setPokemonImage(result.sprites.front_default);
+        setPokemonName(result.name);
+        setPokemonTypes(Array.from(result.types));
+        setPokemonMoves(Array.from(result.moves));
+      });
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Grid>
+        <Row>
+          <Column>
+            <Card
+              pokemonImage = {pokemonImage} 
+              pokemonName  = {pokemonName}
+              pokemonTypes = {pokemonTypes}
+              // pokemonMoves = {pokemonMoves}
+            />
+            <Button onClick={() => 
+              {
+                getPokemon("charizard");
+                console.log("Get Pokemon Charizard");
+              } 
+            }>
+              Load Card...
+            </Button>
+          </Column>
+        </Row>
+      </Grid>
+    </>
   );
-}
+};
 
 export default App;
