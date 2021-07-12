@@ -1,10 +1,10 @@
 import {ListItem, Tile, UnorderedList} from "carbon-components-react";
 
-const Card = ({pokemonImage = "",pokemonName = "",pokemonTypes = [],pokemonMoves = []}) =>{
-    
-    var  pokemonImageToDisplay = pokemonImage.front_default;
+const Card = ({pokemon}) =>{
+
+    var  pokemonImageToDisplay = pokemon.sprites.front_default;
     const changeImage = () => {
-        pokemonImageToDisplay =  (pokemonImageToDisplay === pokemonImage.back_default) ? pokemonImage.front_default : pokemonImage.back_default
+        pokemonImageToDisplay =  (pokemonImageToDisplay === pokemon.sprites.f.back_default) ? pokemon.sprites.front_default : pokemon.sprites.back_default
         document.getElementById("pokemongImage").src= pokemonImageToDisplay
     }
 
@@ -15,15 +15,16 @@ const Card = ({pokemonImage = "",pokemonName = "",pokemonTypes = [],pokemonMoves
     return(
         <>
             <Tile>
-                <h4><strong>{capitalFirstLetter(pokemonName)}</strong></h4>
+                <h4><strong>{capitalFirstLetter(pokemon.name)}</strong></h4>
+                <h6>Pokedex #{pokemon.id}</h6>
                 <img onClick = {()=>changeImage()} src={pokemonImageToDisplay}  id="pokemongImage"></img>
                 <br></br>
-                <strong>Type:</strong>&nbsp;{pokemonTypes.map((t) => capitalFirstLetter(t.type.name) + " ")}
+                <strong>Type:</strong>&nbsp;{pokemon.types.map((t) => capitalFirstLetter(t.type.name) + " ")}
                 <br/>
                 <br/>
                 <strong>Moves:</strong>
                 <UnorderedList>
-                    {pokemonMoves.slice(0,3).map(m => {
+                    {pokemon.moves.slice(0,3).map(m => {
                         return <ListItem>{capitalFirstLetter(m.move.name)}</ListItem>
                     })}
                 </UnorderedList>
