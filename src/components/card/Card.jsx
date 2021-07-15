@@ -1,11 +1,14 @@
 import {ListItem, Tile, UnorderedList} from "carbon-components-react";
+import { useEffect, useState } from "react";
 
 const Card = ({pokemon}) =>{
+    
+    const [image, setImage] = useState(pokemon.front_default);
+    
+    useEffect(() => setImage(pokemon.front_default), [pokemon]);
 
-    var  pokemonImageToDisplay = pokemon.sprites.front_default;
     const changeImage = () => {
-        pokemonImageToDisplay =  (pokemonImageToDisplay === pokemon.sprites.f.back_default) ? pokemon.sprites.front_default : pokemon.sprites.back_default
-        document.getElementById("pokemongImage").src= pokemonImageToDisplay
+        setImage((image === pokemon.back_default) ? pokemon.front_default : pokemon.back_default);
     }
 
     const capitalFirstLetter = (string) =>{
@@ -14,10 +17,10 @@ const Card = ({pokemon}) =>{
     
     return(
         <>
-            <Tile>
+            <Tile style={{width: 160, height: 276}} >
                 <h4><strong>{capitalFirstLetter(pokemon.name)}</strong></h4>
                 <h6>Pokedex #{pokemon.id}</h6>
-                <img onClick = {()=>changeImage()} src={pokemonImageToDisplay}  id="pokemongImage"></img>
+                <img onClick = {()=>changeImage()} src={image}  id="pokemongImage"></img>
                 <br></br>
                 <strong>Type:</strong>&nbsp;{pokemon.types.map((t) => capitalFirstLetter(t.type.name) + " ")}
                 <br/>
