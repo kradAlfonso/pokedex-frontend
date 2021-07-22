@@ -19,11 +19,7 @@ const Board = ({ pokemons, pokemonGen }) => {
       <>
        <br />
        <Grid>
-          {chunk(
-            filter !== null
-              ? pokemons.filter((pokemon) => pokemon.name.includes(filter))
-              : pokemons,
-            5
+          {chunk(pokemons,5
           ).map((row) => {
             return (
               <>

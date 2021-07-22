@@ -8,7 +8,7 @@ const App = () => {
   const [generation, setGeneration] = useState(Number(JSON.parse(sessionStorage.getItem("generation"))) || 1);
 
   useEffect(() => {
-    const url = `http://localhost:8000/pokemons/${generation}`;
+    const url = `https://kradpokedex-backend.herokuapp.com/pokemons/${generation}`;
     fetch(url)
       .then((response) => response.json())
       .then((result) => setPokemons(result));
