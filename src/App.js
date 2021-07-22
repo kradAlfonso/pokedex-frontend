@@ -1,6 +1,7 @@
 import { Column, Grid, Row, Dropdown } from "carbon-components-react";
 import { useEffect, useState } from "react";
-import Board from "./components/Board";
+import Board from "./components/Board/Board";
+import Header from "./components/Header";
 
 const App = () => {
   const [pokemons, setPokemons] = useState([]);
@@ -15,6 +16,7 @@ const App = () => {
 
   return (
     <>
+      <Header />
       <Grid style={{ marginTop: "4rem" }}>
         <Row>
           <Column>

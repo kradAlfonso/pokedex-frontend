@@ -20,7 +20,7 @@ const Card = ({pokemon}) =>{
             <Tile style={{width: 160, height: 276}} >
                 <h4><strong>{capitalFirstLetter(pokemon.name)}</strong></h4>
                 <h6>Pokedex #{pokemon.id}</h6>
-                <img onClick = {()=>changeImage()} src={image}  id="pokemongImage"></img>
+                <img onClick = {()=>changeImage()} src={image}  id="pokemongImage" alt="pokemonImage"></img>
                 <br></br>
                 <strong>Type:</strong>&nbsp;{pokemon.types.map((t) => capitalFirstLetter(t.type.name) + " ")}
                 <br/>
